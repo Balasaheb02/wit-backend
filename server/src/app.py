@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from moviepy.editor import *
 from rembg import remove
 from PIL import Image, ImageColor
 import firebase_admin
 from firebase_admin import credentials, initialize_app, storage
-
+import os
 
 # import io
 
@@ -22,6 +22,10 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/upload', methods=['POST'])
@@ -89,4 +93,4 @@ def create_gif(image_path, bg_color, duration, output_path):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 8080)), debug=True)

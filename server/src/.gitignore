@@ -6,6 +6,9 @@
 
 .venv/
 .venv
+.functions
+.function/
+.function
 *.pyc
 __pycache__/
 
@@ -15,6 +18,7 @@ instance/
 .coverage
 htmlcov/
 venv/
+function/
 dist/
 build/
 *.egg-info/
